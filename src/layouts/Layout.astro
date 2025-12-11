@@ -1,0 +1,54 @@
+---
+import "../styles/global.css";
+
+interface Props {
+    title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8" />
+        <meta
+            name="description"
+            content="Studio Encantado - Salão Infantil Lúdico"
+        />
+        <meta name="viewport" content="width=device-width" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <meta name="generator" content={Astro.generator} />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Pacifico&display=swap"
+            rel="stylesheet"
+        />
+        <title>{title}</title>
+    </head>
+    <body class="bg-white">
+        <slot />
+    </body>
+</html>
+
+<style is:global>
+    :root {
+        --font-outfit: "Outfit", sans-serif;
+        --font-pacifico: "Pacifico", cursive;
+    }
+    body {
+        font-family: var(--font-outfit);
+    }
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-family: var(--font-outfit);
+    }
+    .font-script {
+        font-family: var(--font-pacifico);
+    }
+</style>

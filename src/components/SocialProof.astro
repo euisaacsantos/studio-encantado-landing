@@ -1,0 +1,47 @@
+---
+import { Image } from "astro:assets";
+
+// Importing images as requested
+// Image 1 was referred to as hero-image.webp (the one used in Hero) - reusing it or importing if distinct.
+// Assuming it's the same file.
+import image1 from "../assets/hero-image.webp";
+import image2 from "../assets/gallery-2.webp";
+import image3 from "../assets/gallery-3.webp";
+import image4 from "../assets/gallery-4.webp";
+
+const galleryImages = [
+    { src: image1, alt: "Criança sorrindo cortando cabelo" },
+    { src: image2, alt: "Menina sorrindo no salão" },
+    { src: image3, alt: "Menino brincando" },
+    { src: image4, alt: "Criança no carrinho de brinquedo" },
+];
+---
+
+<section class="py-20 bg-[#5b2b86] text-white">
+    <div class="container mx-auto px-6 text-center">
+        <span
+            class="text-white/80 tracking-[0.2em] text-sm font-bold uppercase mb-4 block"
+        >
+            Depoimentos
+        </span>
+
+        <h2 class="text-3xl md:text-5xl font-bold mb-12">
+            São mais de 50 mil crianças atendidas.
+        </h2>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+            {
+                galleryImages.map((image) => (
+                    <div class="aspect-[3/4] overflow-hidden rounded-xl border-4 border-white/5 shadow-lg group relative">
+                        <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition duration-300 z-10" />
+                        <Image
+                            src={image.src}
+                            alt={image.alt}
+                            class="w-full h-full object-cover transform group-hover:scale-110 transition duration-700"
+                        />
+                    </div>
+                ))
+            }
+        </div>
+    </div>
+</section>

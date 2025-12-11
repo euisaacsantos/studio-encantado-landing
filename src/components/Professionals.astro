@@ -1,0 +1,58 @@
+---
+const professionals = [
+  {
+    name: "TIA PATRICIA",
+    role: "PROFISSIONAL",
+    image: "https://i.pravatar.cc/300?img=5" // Placeholder
+  },
+  {
+    name: "TIO DIEGO",
+    role: "PROFISSIONAL",
+    image: "https://i.pravatar.cc/300?img=11" // Placeholder
+  },
+  {
+    name: "TIA ALINE",
+    role: "PROFISSIONAL",
+    image: "https://i.pravatar.cc/300?img=9" // Placeholder
+  }
+];
+---
+
+<section class="py-24 bg-[#5b2b86] text-white">
+    <div class="container mx-auto px-6 text-center">
+        
+        <div class="mb-16">
+            <span class="uppercase tracking-[0.2em] text-sm font-semibold text-white/80 mb-2 block">
+                Sobre Nós
+            </span>
+            <h2 class="text-4xl md:text-5xl font-bold">
+                Nossos Profissionais
+            </h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto px-4">
+            {professionals.map((pro) => (
+                <div class="bg-white rounded-2xl p-8 pt-20 relative text-center shadow-xl group hover:-translate-y-2 transition duration-300 mt-12 md:mt-0">
+                    
+                    <!-- Avatar popping out -->
+                    <div class="absolute -top-12 left-1/2 -translate-x-1/2 w-32 h-32 rounded-full border-4 border-white shadow-lg overflow-hidden bg-gray-200">
+                        <img 
+                            src={pro.image} 
+                            alt={pro.name} 
+                            class="w-full h-full object-cover group-hover:scale-110 transition duration-500"
+                        />
+                    </div>
+
+                    <h3 class="text-[#9d4edd] text-xl font-black uppercase mb-2">
+                        {pro.name}
+                    </h3>
+                    
+                    <p class="text-gray-400 text-xs font-bold tracking-widest uppercase">
+                        {pro.role}
+                    </p>
+                </div>
+            ))}
+        </div>
+
+    </div>
+</section>

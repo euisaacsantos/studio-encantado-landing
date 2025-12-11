@@ -1,0 +1,55 @@
+---
+import { Image } from "astro:assets";
+import ctaImage from "../assets/cta-final.webp";
+---
+
+<section class="py-24 bg-white">
+    <div class="container mx-auto px-6">
+        <div
+            class="flex flex-col md:flex-row items-center gap-16 max-w-6xl mx-auto"
+        >
+            <!-- Image -->
+            <div class="w-full md:w-1/2">
+                <div
+                    class="relative rounded-[2.5rem] overflow-hidden shadow-2xl"
+                >
+                    <Image
+                        src={ctaImage}
+                        alt="Criança feliz com profissional"
+                        class="w-full h-auto object-cover"
+                    />
+                </div>
+            </div>
+
+            <!-- Text Content -->
+            <div class="w-full md:w-1/2 space-y-8">
+                <div>
+                    <h2
+                        class="text-3xl md:text-5xl font-bold text-[#5b2b86] leading-tight"
+                    >
+                        Entendeu por que <br />
+                        somos o lugar perfeito <br />
+                        para o seu pequeno?
+                    </h2>
+                    <div class="w-24 h-1 bg-[#ff9100] mt-4"></div>
+                </div>
+
+                <p
+                    class="text-gray-500 font-light text-lg leading-relaxed max-w-md"
+                >
+                    Não perca tempo e agende agora mesmo essa experiência mágica
+                    para quem mais você ama.
+                </p>
+
+                <div class="pt-4">
+                    <a
+                        href="#"
+                        class="inline-block bg-[#00a859] hover:bg-[#008f4c] text-white text-lg font-bold py-4 px-12 rounded-full shadow-lg transition transform hover:scale-105"
+                    >
+                        AGENDAR AGORA
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

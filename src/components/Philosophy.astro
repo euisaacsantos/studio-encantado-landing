@@ -1,0 +1,56 @@
+---
+import { Image } from "astro:assets";
+import image1 from "../assets/team-photo.webp";
+import image2 from "../assets/philosophy-2.webp";
+import image3 from "../assets/philosophy-3.webp";
+
+const images = [
+    { src: image1, alt: "Equipe Studio Encantado reunida" },
+    { src: image2, alt: "Criança sorrindo durante o corte" },
+    { src: image3, alt: "Criança feliz mostrando o visual" },
+];
+---
+
+<section class="py-20 bg-white">
+    <div class="container mx-auto px-6 text-center">
+        <div class="max-w-4xl mx-auto mb-16 space-y-6">
+            <h2
+                class="text-3xl md:text-4xl lg:text-5xl font-bold text-[#5b2b86] leading-tight"
+            >
+                Entendemos que cada criança é única e por isso criamos um espaço
+                onde elas se sentem seguras, livres e felizes.
+            </h2>
+
+            <div class="w-16 h-1 bg-[#ff9100] mx-auto rounded-full"></div>
+
+            <p
+                class="text-gray-500 text-lg font-light max-w-2xl mx-auto leading-relaxed"
+            >
+                Além disso, nosso espaço foi pensado para proporcionar uma
+                experiência leve, respeitosa e cheia de aconchego para as
+                crianças e seus familiares.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+            {
+                images.map((img) => (
+                    <div class="rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition duration-500 transform hover:-translate-y-2">
+                        <Image
+                            src={img.src}
+                            alt={img.alt}
+                            class="w-full h-80 object-cover"
+                        />
+                    </div>
+                ))
+            }
+        </div>
+
+        <a
+            href="#"
+            class="inline-block bg-[#ff9100] hover:bg-[#e68200] text-white text-lg font-bold py-4 px-12 rounded-full shadow-lg transition transform hover:scale-105"
+        >
+            AGENDAR AGORA
+        </a>
+    </div>
+</section>
