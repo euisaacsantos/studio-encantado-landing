@@ -1,0 +1,83 @@
+---
+const metaPixelId = import.meta.env.META_PIXEL_ID;
+const googleTagId = import.meta.env.GOOGLE_TAG_ID;
+---
+
+<!-- Global Scripts -->
+{googleTagId && (
+    <>
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=${googleTagId}`}></script>
+        <script is:inline define:vars={{ googleTagId }}>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', googleTagId);
+        </script>
+    </>
+)}
+
+{metaPixelId && (
+    <script is:inline define:vars={{ metaPixelId }}>
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', metaPixelId);
+        fbq('track', 'PageView');
+    </script>
+)}
+
+<script>
+    declare const gtag: any;
+    declare const fbq: any;
+
+    function trackLead(unitName: string) {
+        // Track on Google
+        if (typeof gtag === 'function') {
+            gtag('event', 'generate_lead', {
+                'event_category': 'Contact',
+                'event_label': `WhatsApp - ${unitName}`
+            });
+        }
+        
+        // Track on Meta (Browser)
+        if (typeof fbq === 'function') {
+            fbq('track', 'Contact', {
+                content_name: `WhatsApp - ${unitName}`,
+                content_category: 'Lead'
+            });
+        }
+
+        // Send to Server (Meta CAPI)
+        fetch('/api/track', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                eventName: 'Contact',
+                unitName: unitName,
+                url: window.location.href,
+                userAgent: navigator.userAgent
+            })
+        }).catch(err => console.error('CAPI Error:', err));
+    }
+
+    // Attach to all WhatsApp links
+    document.addEventListener('click', (e) => {
+        const target = e.target as HTMLElement;
+        const link = target.closest('a');
+        
+        if (link && (link.href.includes('wa.me') || link.href.includes('whatsapp.com'))) {
+            const text = link.innerText.toLowerCase();
+            let unit = 'Geral';
+            
+            if (text.includes('calhau')) unit = 'Calhau';
+            else if (text.includes('ponta do farol')) unit = 'Ponta do Farol';
+            
+            trackLead(unit);
+        }
+    });
+</script>
